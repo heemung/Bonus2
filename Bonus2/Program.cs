@@ -10,9 +10,11 @@ namespace Bonus2
     {
         static DateTime date;
         static DateTime nowDate = DateTime.Now;
+        static string userMonth, userDay;
+
         static void Main(string[] args)
         {
-            string userYear, userMonth, userDay, textDateFull;
+            string userYear, textDateFull;
             bool testDate, userContinue = true;
 
             Console.WriteLine("Enter Your Birthday");
@@ -46,7 +48,13 @@ namespace Bonus2
 
         static bool ItsMyBirthday()
         {
-            if (date == nowDate)
+
+            int nowMonth = nowDate.Month;
+            int nowDay = nowDate.Day;
+            int numUserMonth = Convert.ToInt32(userMonth);
+            int numUserDay = Convert.ToInt32(userDay);
+
+            if ((nowMonth == numUserMonth) && (nowDay == numUserDay))
             {
                 return true;
             }
@@ -54,6 +62,7 @@ namespace Bonus2
             {
                 return false;
             }
+
         }
         static void GetYearsAndDays(DateTime dateCopy)
         {
