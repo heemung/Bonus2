@@ -13,29 +13,34 @@ namespace Bonus2
         static void Main(string[] args)
         {
             string userYear, userMonth, userDay, textDateFull;
-            bool testDate;
+            bool testDate, userContinue = true;
 
             Console.WriteLine("Enter Your Birthday");
-
-            do
+            while (userContinue)
             {
-                Console.Write("What is the year? Example: 1990 -- ");
-                userYear = Console.ReadLine();
-                Console.Write("What is the Month? Example: 01 -- ");
-                userMonth = Console.ReadLine();
-                Console.Write("What is the Day? Example: 05 -- ");
-                userDay = Console.ReadLine();
+                do
+                {
+                    Console.Write("What is the year? Example: 1990 -- ");
+                    userYear = Console.ReadLine();
+                    Console.Write("What is the Month? Example: 01 -- ");
+                    userMonth = Console.ReadLine();
+                    Console.Write("What is the Day? Example: 05 -- ");
+                    userDay = Console.ReadLine();
 
 
-                textDateFull = userMonth + "/" + userDay + "/" + userYear;
-                testDate = DateTime.TryParse(textDateFull, out date);
+                    textDateFull = userMonth + "/" + userDay + "/" + userYear;
+                    testDate = DateTime.TryParse(textDateFull, out date);
 
 
-                if (!testDate)
-                    Console.WriteLine("\nPlease Enter Valid Date. Try Again.\n");
-            } while (!testDate);
+                    if (!testDate)
+                        Console.WriteLine("\nPlease Enter Valid Date. Try Again.\n");
+                } while (!testDate);
 
-            GetYearsAndDays(date);
+                GetYearsAndDays(date);
+                Console.WriteLine("Do you want to run the program again? y/n?");
+                userContinue = Console.ReadLine().ToLower() == "y";
+            }
+
 
         }
 
@@ -63,7 +68,7 @@ namespace Bonus2
             toYears = dateDifference.Days / 365;
             toDays = dateDifference.Days % 365;
 
-            if (ItsMyBirthday())
+            if (ItsMyBirthday() == true)
             {
                 Console.WriteLine("Happy Birthday!!!\n" +
                     "You are {0} years old.", toYears);
