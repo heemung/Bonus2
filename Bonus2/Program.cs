@@ -8,14 +8,71 @@ namespace Bonus2
 {
     class Program
     {
+        static DateTime date;
+        static DateTime nowDate = DateTime.Now;
         static void Main(string[] args)
         {
-            // The code provided will print ‘Hello World’ to the console.
-            // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            string userYear, userMonth, userDay, textDateFull;
+            bool testDate;
 
-            // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+            Console.WriteLine("Enter Your Birthday");
+
+            do
+            {
+                Console.Write("What is the year? Example: 1990 -- ");
+                userYear = Console.ReadLine();
+                Console.Write("What is the Month? Example: 01 -- ");
+                userMonth = Console.ReadLine();
+                Console.Write("What is the Day? Example: 05 -- ");
+                userDay = Console.ReadLine();
+
+
+                textDateFull = userMonth + "/" + userDay + "/" + userYear;
+                testDate = DateTime.TryParse(textDateFull, out date);
+
+
+                if (!testDate)
+                    Console.WriteLine("\nPlease Enter Valid Date. Try Again.\n");
+            } while (!testDate);
+
+            GetYearsAndDays(date);
+
+        }
+
+        static bool ItsMyBirthday()
+        {
+            if (date == nowDate)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        static void GetYearsAndDays(DateTime dateCopy)
+        {
+            TimeSpan dateDifference;
+            double toYears, toDays;
+            Console.WriteLine(dateCopy);
+            Console.ReadLine();
+
+            dateDifference = (nowDate - dateCopy);
+            Console.WriteLine(dateDifference.Days);
+            Console.ReadLine();
+            toYears = dateDifference.Days / 365;
+            toDays = dateDifference.Days % 365;
+
+            if (ItsMyBirthday())
+            {
+                Console.WriteLine("Happy Birthday!!!\n" +
+                    "You are {0} years old.", toYears);
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("You are {0} years old and {1} days.", toYears, toDays);
+            }
         }
     }
 }
